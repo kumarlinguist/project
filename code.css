@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root{
+  --ink:#0e0d0c;
+  --paper:#f4f1ea;
+  --dim: rgba(14,13,12,0.45);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  background:var(--paper);
+  overflow:hidden;
+}
+
+body{
+  font-family:'Poppins', sans-serif;
+  color:var(--ink);
+}
+
+#stage{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:var(--paper);
+  z-index:10;
+}
+
+/* ===== word line ===== */
+.line{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.15em;
+  white-space:nowrap;
+}
+
+.word{
+  font-family:'Poppins', sans-serif;
+  font-weight:500;
+  font-size:clamp(3.4rem, 10vw, 9rem);
+  letter-spacing:-0.01em;
+  line-height:1;
+  display:inline-flex;
+}
+
+.char{
+  display:inline-block;
+  overflow:hidden; /* mask for each individual letter's slide-up entrance */
+}
+
+.char span{
+  display:inline-block;
+  transform:translateY(115%);
+}
+
+/* the two halves that will separate */
+.group{
+  display:flex;
+  gap:0.55em;
+}
+
+/* gap that opens between the groups to host the image */
+.gap{
+  width:0px;
+  flex-shrink:0;
+  transition:none; /* driven by WAAPI, not CSS transition */
+}
+
+/* ===== image slideshow that appears in the gap ===== */
+.image-slot{
+  position:relative;
+  width:min(30vw, 340px);
+  height:min(38vh, 440px);
+  flex-shrink:0;
+  overflow:hidden;
+  clip-path: inset(50% 0 50% 0); /* closed: horizontal reveal */
+}
+
+.image-slot img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+}
+
+.image-slot img.active{ opacity:1; }
+
+/* ===== hero section, revealed after preloader ===== */
+#hero{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--paper);
+  z-index:1;
+}
+
+#hero h1{
+  font-family:'Poppins', sans-serif;
+  font-weight:500;
+  font-size:clamp(3.4rem, 10vw, 9rem);
+  letter-spacing:-0.01em;
+  line-height:1;
+  color:var(--ink);
+  overflow:hidden;
+}
+
+#hero h1 span{
+  display:inline-block;
+  transform: translateY(100%);
+}
+
+/* curtain panels that wipe away to reveal the hero, instead of a plain fade */
+.curtain{
+  position:fixed;
+  top:0;
+  bottom:0;
+  width:50%;
+  background:var(--ink);
+  z-index:20;
+}
+.curtain.c-left{ left:0; transform: translateX(-100%); }
+.curtain.c-right{ right:0; transform: translateX(100%); }
