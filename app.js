@@ -27,7 +27,7 @@ onAuthStateChanged(auth,async user=>{
 });
 
 function watchUsers(){
-  stopUsers?.();stopUsers=onSnapshot(query(collection(db,"users"),orderBy("name")),snap=>{
+  stopUsers?.();stopUsers=onSnapshot(collection(db,"users"), snap => {
     const term=$("userSearch").value.toLowerCase();const list=$("userList");list.innerHTML="";
     snap.forEach(d=>{const u=d.data();if(u.uid===me.uid||!(`${u.name} ${u.email}`.toLowerCase().includes(term)))return;
       const el=document.createElement("div");el.className="user"+(selected?.uid===u.uid?" active":"");el.innerHTML=`<div class="avatar">${esc(initials(u.name))}</div><div class="meta"><b>${esc(u.name||"User")}</b><small>${esc(u.email||"")}</small></div>`;el.onclick=()=>openChat(u);list.appendChild(el);
