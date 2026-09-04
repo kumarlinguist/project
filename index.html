@@ -1,38 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-    <link href="calculator.py" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chat2 — Firebase Chat</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-     <div id="stage">
-        <div class="line" id="line">
-            <div class="group" id="groupLeft"></div>
+  <div id="authView" class="auth-shell">
+    <div class="auth-card">
+      <div class="logo">C2</div>
+      <h1>Chat2</h1>
+      <p class="muted">Realtime messaging with Firebase</p>
+      <div id="authError" class="error"></div>
+      <input id="email" type="email" placeholder="Email" autocomplete="email">
+      <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+      <input id="displayName" type="text" placeholder="Display name (for sign up)">
+      <div class="row">
+        <button id="loginBtn" class="primary">Log in</button>
+        <button id="signupBtn">Create account</button>
+      </div>
+      <small class="muted">Create two accounts in Firebase Authentication to test chat between users.</small>
+    </div>
+  </div>
 
-            <div class="gap" id="gap">
-                <div class="image-slot" id="imageSlot">
-                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop" class="active" alt="">
-                    <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop" alt="">
-                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=800&auto=format&fit=crop" alt="">
-                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop" alt="">
-                </div>
-            </div>
+  <div id="appView" class="app hidden">
+    <aside class="sidebar">
+      <header class="side-head">
+        <div class="brand"><span class="logo small">C2</span><span>Chat2</span></div>
+        <button id="logoutBtn" class="icon-btn" title="Log out">↪</button>
+      </header>
+      <div class="profile">
+        <div id="meAvatar" class="avatar"></div>
+        <div><b id="meName">User</b><small id="meEmail"></small></div>
+      </div>
+      <div class="search"><input id="userSearch" placeholder="Search people..."></div>
+      <div id="userList" class="user-list"></div>
+    </aside>
 
-            <div class="group" id="groupRight"></div>
+    <main class="chat">
+      <header id="chatHead" class="chat-head">
+        <div>
+          <h2 id="chatName">Select a person</h2>
+          <span id="chatStatus" class="muted">Choose a user to start chatting</span>
         </div>
-    </div>
+      </header>
 
-    <div class="curtain c-left" id="curtainLeft"></div>
-    <div class="curtain c-right" id="curtainRight"></div>
+      <section id="messages" class="messages">
+        <div class="empty"><div class="empty-icon">💬</div><h3>Your messages</h3><p>Text, photos, videos, audio and files can be shared here.</p></div>
+      </section>
 
-    <div id="hero">
-        <h1><span>AKHTAR <BR>
-                 <PRE>  BABU  </PRE></span></h1>
-    </div>
+      <div id="uploadProgress" class="progress hidden"><span></span></div>
+      <div class="composer">
+        <input id="fileInput" type="file" hidden accept="image/*,video/*,audio/*,.pdf,.txt,.doc,.docx,.xls,.xlsx,.zip">
+        <button id="attachBtn" class="icon-btn" title="Photo, video, audio or file">＋</button>
+        <textarea id="messageInput" rows="1" placeholder="Type a message..." disabled></textarea>
+        <button id="sendBtn" class="send" disabled>Send</button>
+      </div>
+    </main>
+  </div>
 
-    <script src="index.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
